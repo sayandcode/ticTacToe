@@ -20,27 +20,30 @@
     //winning combinations(2n+2)
     let winCombos=[];
   
-    //rows
-    //for each row, add the value of each cell
-    cell.reduce((sum,cellVal,cellIndex)=>{//function that checks whether end of row, otherwise adds to sum
-      sum+=cellVal;
-      if((cellIndex+1)%n===0){  //when does a row end? when (index+1)%(n)===0
-        winCombos.push(sum)//push the obtained sum
-        sum=0;//reset the sum
+    cell.reduce(([rowSum,colSum,diagSum],cellVal,cellIndex)=>{
+      
+      //add the values to the sum counters
+      rowSum+=cellVal;
+      colSum[cellIndex%n]+=cellVal;
+      if((cellIndex)%(n+1)===0){
+        diagSum[0]+=cellVal;
       }
-      return sum;
-    });
-  
-    //column
-    let colSum=cell.reduce((sum,cellVal,cellIndex)=>{
-      sum[cellIndex%3]+=cellVal//determine which column its in
-      return sum;
-    },[0,0,0]);
-  
-    winCombos.push(...colSum);
-  
-      //diagonal
-    //antiDiag
+      if(((cellIndex%(n-1))===0)&&(cellIndex !==n**2-1)){
+        diagSum[1]+=cellVal;
+      }
+
+      //check if end of row, push to winCombos, and reset
+      //row check
+      if((cellIndex+1)%n===0){ 
+        winCombos.push(rowSum);
+        rowSum=0;
+      }
+      //dont need to check if end for column and diag, since we're storing the variable anyway
+      
+      return [rowSum,colSum,diagSum];
+    },[0,Array(n).fill(0),[0,0]]);
+
+    winCombos.push(...[colSum])
     console.log(winCombos.map(combo=>combo.toString(2)));
   // }
   
