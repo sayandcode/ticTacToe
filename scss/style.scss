@@ -56,6 +56,7 @@ body{
 		height: $cell-Size;
 		width: $mark-Size;
 		background-color: $color;
+		border-radius: 5px;
 		}
 		&::before{
 			transform: rotate(-45deg);
@@ -72,29 +73,36 @@ body{
 	}
 }
 
-.grid .x.cell{	//.grid added for increasing specificity
+.grid div.X.cell{						//.grid and div added for increasing specificity
 	background-color: $solidColor;
-	@include xStyle($plainColor)
+	@include xStyle($plainColor);
 }
 
+@mixin oStyle($border,$inside) {
+	&::before{
+		width: $cell-Size*0.75;
+		height: $cell-Size*0.75;
+		border-radius: 50%;
+		background-color: $border
+	}
+	&::after{
+		width: $cell-Size*0.45;
+		height: $cell-Size*0.45;
+		border-radius: 50%;
+		background-color: $inside;
+	}
+}
+
+.OTurn .cell{
+	@include oStyle($plainColor,$plainColor);
+	&:hover::before{
+		background-color: scale-color($solidColor,$lightness:80%);
+	}
+}
+
+.grid div.O.cell{						//.grid and div added for increasing specificity
+	background-color: $solidColor;
+	@include oStyle($plainColor, $solidColor);
+}
 
 @import 'winScreen';
-
-
-// .OTurn>.cell{
-// 	&::before{
-// 		width: $cell-Size*0.8;
-// 		height: $cell-Size*0.8;
-// 		border-radius: 50%;
-// 		background-color: scale-color($solidColor, $lightness: 100%);
-// 	}
-// 	&::after{
-// 		width: $cell-Size*0.5;
-// 		height: $cell-Size*0.5;
-// 		border-radius: 50%;
-// 		background-color: $plainColor;
-// 	}
-// 	&:hover::before{
-// 		background-color: scale-color($solidColor, $lightness: 80%);
-// 	}
-// }

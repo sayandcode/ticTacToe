@@ -48,6 +48,7 @@ body {
   height: 50px;
   width: 5px;
   background-color: #FFFFFF;
+  border-radius: 5px;
 }
 .XTurn .cell::before {
   transform: rotate(-45deg);
@@ -59,19 +60,52 @@ body {
   background-color: #c7d0e7;
 }
 
-.grid .x.cell {
+.grid div.X.cell {
   background-color: #222E50;
 }
-.grid .x.cell::before, .grid .x.cell::after {
+.grid div.X.cell::before, .grid div.X.cell::after {
   height: 50px;
   width: 5px;
   background-color: #FFFFFF;
+  border-radius: 5px;
 }
-.grid .x.cell::before {
+.grid div.X.cell::before {
   transform: rotate(-45deg);
 }
-.grid .x.cell::after {
+.grid div.X.cell::after {
   transform: rotate(45deg);
+}
+
+.OTurn .cell::before {
+  width: 37.5px;
+  height: 37.5px;
+  border-radius: 50%;
+  background-color: #FFFFFF;
+}
+.OTurn .cell::after {
+  width: 22.5px;
+  height: 22.5px;
+  border-radius: 50%;
+  background-color: #FFFFFF;
+}
+.OTurn .cell:hover::before, .OTurn .cell:focus::before {
+  background-color: #c7d0e7;
+}
+
+.grid div.O.cell {
+  background-color: #222E50;
+}
+.grid div.O.cell::before {
+  width: 37.5px;
+  height: 37.5px;
+  border-radius: 50%;
+  background-color: #FFFFFF;
+}
+.grid div.O.cell::after {
+  width: 22.5px;
+  height: 22.5px;
+  border-radius: 50%;
+  background-color: #222E50;
 }
 
 .overlay {
