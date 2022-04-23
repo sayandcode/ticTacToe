@@ -1,7 +1,7 @@
 // format= 0 000 0 001 0 001 0 100 0 001 0 001 0 000 0 001 
 // format= 0 aDi 0 Dia 0 Co3 0 Co2 0 Co1 0 Rw3 0 Rw2 0 Rw1 
 const board = (function(){
-function findWinCombos(n){
+function assignCellValues(n){
   let cell=[]; 
   let indenter=0;
   for (let i = 0; i < n*n; i++) {  //for each cell
@@ -28,7 +28,6 @@ function findWinCombos(n){
 }
 
 /* BELOW IS A FUNCTION FOR YOU TO SEE THE FORM OF EACH CELL VALUE, AS CONCEPTUALIZED WITH SPACES */
-/* IT IS NOT USED IN THE FUNCTION, AND IS SOLELY FOR YOUR UNDERSTANDING */
 // function displayNbits(matrix){          
 //   let n=matrix.length**0.5
 //   let N=(2*n+2)*(n+1);
@@ -44,9 +43,10 @@ function findWinCombos(n){
 //   });  
 //   console.table(result);
 // }
+/* IT IS NOT USED IN THE FUNCTION, AND IS SOLELY FOR YOUR UNDERSTANDING */
 
 return {
-  findWinCombos
+  assignCellValues
 }
 
 })();

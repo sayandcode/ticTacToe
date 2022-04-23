@@ -1,0 +1,10 @@
+.overlay{
+    height: 100vh;
+    width: 100vw;
+    background-color: color.scale(red, $alpha: -50%);
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    display: none;
+}
