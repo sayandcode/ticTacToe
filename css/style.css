@@ -1,26 +1,32 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,500;1,700&display=swap");
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 body {
   height: 100vh;
   background-color: #FFEBCC;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 2rem;
+  font-family: "Open Sans", sans-serif;
 }
 
 .grid {
   display: grid;
-  grid-template-rows: repeat(3, 50px);
-  grid-template-columns: repeat(3, 50px);
+  grid-template-rows: repeat(3, 75px);
+  grid-template-columns: repeat(3, 75px);
   gap: 0.5rem;
 }
 
 .cell {
-  height: 50px;
-  width: 50px;
+  height: 75px;
+  width: 75px;
   background-color: #FFFFFF;
   border-radius: 20%;
   transition: all 0.1s ease-in-out;
@@ -45,8 +51,8 @@ body {
 }
 
 .XTurn .cell::before, .XTurn .cell::after {
-  height: 50px;
-  width: 5px;
+  height: 75px;
+  width: 7.5px;
   background-color: #FFFFFF;
   border-radius: 5px;
 }
@@ -64,8 +70,8 @@ body {
   background-color: #222E50;
 }
 .grid div.X.cell::before, .grid div.X.cell::after {
-  height: 50px;
-  width: 5px;
+  height: 75px;
+  width: 7.5px;
   background-color: #FFFFFF;
   border-radius: 5px;
 }
@@ -77,14 +83,14 @@ body {
 }
 
 .OTurn .cell::before {
-  width: 37.5px;
-  height: 37.5px;
+  width: 56.25px;
+  height: 56.25px;
   border-radius: 50%;
   background-color: #FFFFFF;
 }
 .OTurn .cell::after {
-  width: 22.5px;
-  height: 22.5px;
+  width: 33.75px;
+  height: 33.75px;
   border-radius: 50%;
   background-color: #FFFFFF;
 }
@@ -96,24 +102,113 @@ body {
   background-color: #222E50;
 }
 .grid div.O.cell::before {
-  width: 37.5px;
-  height: 37.5px;
+  width: 56.25px;
+  height: 56.25px;
   border-radius: 50%;
   background-color: #FFFFFF;
 }
 .grid div.O.cell::after {
-  width: 22.5px;
-  height: 22.5px;
+  width: 33.75px;
+  height: 33.75px;
   border-radius: 50%;
   background-color: #222E50;
 }
 
-.overlay {
-  height: 100vh;
-  width: 100vw;
-  background-color: rgba(255, 0, 0, 0.5);
+button {
+  font-family: "Open Sans", sans-serif;
+  font-size: 2rem;
+  background-color: #222E50;
+  color: #FFFFFF;
+  border-radius: 5px;
+  padding-inline: 0.35em;
+  border: 0;
+}
+button:hover, button.cell:focus {
+  background-color: #2e3e6c;
+  cursor: pointer;
+}
+
+button.replay {
+  font-weight: 500;
+  background-color: #FC7A57;
+  padding: 0.25em 0.5em;
+  border-radius: 25px;
+}
+button.replay:hover, button.replay.cell:focus {
+  background-color: #FFFFFF;
+  color: #FC7A57;
+  border: 2px solid #FC7A57;
+}
+
+.spinner button {
+  font-weight: 700;
+}
+
+button.plus::after {
+  content: "+";
+}
+
+.minus::after {
+  content: "–";
+}
+
+.endMessage {
+  font-size: 3rem;
+  font-style: italic;
+  font-weight: 700;
+}
+.endMessage span {
+  position: relative;
+}
+.endMessage span.win::before {
+  content: "Won!";
+}
+.endMessage span.lose::before {
+  content: "Lose!";
+}
+.endMessage span::after {
+  content: "";
+  width: 100%;
+  height: 0.2em;
+  background-color: #FC7A57;
   position: absolute;
-  top: 0;
+  top: 1.1em;
   left: 0;
+  transform: rotate(-2.5deg);
+}
+
+.spinner {
+  margin-top: 1.6rem;
+  display: flex;
+  align-items: center;
+}
+.spinner input {
+  -moz-appearance: textfield;
+  height: 100%;
+  width: 2em;
+  border: 0;
+  font-family: "Open Sans", sans-serif;
+  font-size: 1rem;
+  text-align: center;
+}
+.spinner input::-webkit-outer-spin-button, .spinner input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+.spinner input:invalid {
+  background-color: #ff6666;
+}
+
+.replay {
+  position: absolute;
+}
+
+.inactive {
+  pointer-events: none;
+}
+
+.hide {
   display: none;
+}
+.hide span::after {
+  width: 0%;
 }/*# sourceMappingURL=style.css.map */

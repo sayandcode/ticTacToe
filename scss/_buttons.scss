@@ -1,0 +1,36 @@
+button{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 2rem;
+    background-color: $solidColor;
+    color: $plainColor;
+    border-radius: 5px;
+    padding-inline: 0.35em;
+    border: 0;
+    &:hover{
+        background-color: scale-color($solidColor, $lightness:10%);
+        cursor: pointer;
+    }
+}
+
+button.replay{
+    font-weight: 500;
+    background-color: $accentColor;
+    padding: 0.25em 0.5em;
+    border-radius: 25px;
+    &:hover{
+        background-color: $plainColor;
+        color: $accentColor;
+        border: 2px solid $accentColor;
+    }
+}
+
+.spinner button{
+    font-weight: 700;
+}
+
+button.plus::after{
+    content: '+';
+}
+.minus::after{
+    content: '–';
+}
