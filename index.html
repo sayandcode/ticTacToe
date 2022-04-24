@@ -9,23 +9,14 @@
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-    <h2 class="endMessage">You <span class="win"></span></h2>
-    <div class="grid XTurn inactive">
-        <div class="cell" tabindex="0"></div>
-        <div class="cell" tabindex="0"></div>
-        <div class="cell" tabindex="0"></div>
-        <div class="cell" tabindex="0"></div>
-        <div class="cell" tabindex="0"></div>
-        <div class="cell" tabindex="0"></div>
-        <div class="cell" tabindex="0"></div>
-        <div class="cell O" tabindex="0"></div>
-        <div class="cell X" tabindex="0"></div>
+    <h2 class="endMessage hide">You <span class="win"></span></h2>
+    <div class="gridContainer OTurn">
     </div>
-    <div class="spinner">
+    <div class="spinner hide">
         <button class="minus"></button>
         <input type="number" min="3" max="9" value="3">
         <button class="plus"></button>
     </div>
-    <button class="replay">PLAY AGAIN</button>
+    <button class="replay hide">PLAY AGAIN</button>
 </body>
 </html>

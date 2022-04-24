@@ -17,16 +17,13 @@ body {
   font-family: "Open Sans", sans-serif;
 }
 
-.grid {
+.gridContainer {
   display: grid;
-  grid-template-rows: repeat(3, 75px);
-  grid-template-columns: repeat(3, 75px);
+  /* Set grid dimensions in Javascript */
   gap: 0.5rem;
 }
 
 .cell {
-  height: 75px;
-  width: 75px;
   background-color: #FFFFFF;
   border-radius: 20%;
   transition: all 0.1s ease-in-out;
@@ -51,8 +48,8 @@ body {
 }
 
 .XTurn .cell::before, .XTurn .cell::after {
-  height: 75px;
-  width: 7.5px;
+  height: 100%;
+  width: 10%;
   background-color: #FFFFFF;
   border-radius: 5px;
 }
@@ -66,31 +63,31 @@ body {
   background-color: #c7d0e7;
 }
 
-.grid div.X.cell {
+.gridContainer div.X.cell {
   background-color: #222E50;
 }
-.grid div.X.cell::before, .grid div.X.cell::after {
-  height: 75px;
-  width: 7.5px;
+.gridContainer div.X.cell::before, .gridContainer div.X.cell::after {
+  height: 100%;
+  width: 10%;
   background-color: #FFFFFF;
   border-radius: 5px;
 }
-.grid div.X.cell::before {
+.gridContainer div.X.cell::before {
   transform: rotate(-45deg);
 }
-.grid div.X.cell::after {
+.gridContainer div.X.cell::after {
   transform: rotate(45deg);
 }
 
 .OTurn .cell::before {
-  width: 56.25px;
-  height: 56.25px;
+  width: 75%;
+  height: 75%;
   border-radius: 50%;
   background-color: #FFFFFF;
 }
 .OTurn .cell::after {
-  width: 33.75px;
-  height: 33.75px;
+  width: 45%;
+  height: 45%;
   border-radius: 50%;
   background-color: #FFFFFF;
 }
@@ -98,18 +95,18 @@ body {
   background-color: #c7d0e7;
 }
 
-.grid div.O.cell {
+.gridContainer div.O.cell {
   background-color: #222E50;
 }
-.grid div.O.cell::before {
-  width: 56.25px;
-  height: 56.25px;
+.gridContainer div.O.cell::before {
+  width: 75%;
+  height: 75%;
   border-radius: 50%;
   background-color: #FFFFFF;
 }
-.grid div.O.cell::after {
-  width: 33.75px;
-  height: 33.75px;
+.gridContainer div.O.cell::after {
+  width: 45%;
+  height: 45%;
   border-radius: 50%;
   background-color: #222E50;
 }
