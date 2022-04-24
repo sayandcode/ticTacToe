@@ -47,64 +47,64 @@ body {
   outline-color: #222E50;
 }
 
-.XTurn .cell::before, .XTurn .cell::after {
+.XTurn .cell:not(.O, .X)::before, .XTurn .cell:not(.O, .X)::after {
   height: 100%;
   width: 10%;
   background-color: #FFFFFF;
   border-radius: 5px;
 }
-.XTurn .cell::before {
+.XTurn .cell:not(.O, .X)::before {
   transform: rotate(-45deg);
 }
-.XTurn .cell::after {
+.XTurn .cell:not(.O, .X)::after {
   transform: rotate(45deg);
 }
-.XTurn .cell:hover::after, .XTurn .cell:focus::after, .XTurn .cell:hover::before, .XTurn .cell:focus::before {
+.XTurn .cell:not(.O, .X):hover::after, .XTurn .cell:not(.O, .X):focus::after, .XTurn .cell:not(.O, .X):hover::before, .XTurn .cell:not(.O, .X):focus::before {
   background-color: #c7d0e7;
 }
 
-.gridContainer div.X.cell {
+.gridContainer .X.cell {
   background-color: #222E50;
 }
-.gridContainer div.X.cell::before, .gridContainer div.X.cell::after {
+.gridContainer .X.cell::before, .gridContainer .X.cell::after {
   height: 100%;
   width: 10%;
   background-color: #FFFFFF;
   border-radius: 5px;
 }
-.gridContainer div.X.cell::before {
+.gridContainer .X.cell::before {
   transform: rotate(-45deg);
 }
-.gridContainer div.X.cell::after {
+.gridContainer .X.cell::after {
   transform: rotate(45deg);
 }
 
-.OTurn .cell::before {
+.OTurn .cell:not(.X, .O)::before {
   width: 75%;
   height: 75%;
   border-radius: 50%;
   background-color: #FFFFFF;
 }
-.OTurn .cell::after {
+.OTurn .cell:not(.X, .O)::after {
   width: 45%;
   height: 45%;
   border-radius: 50%;
   background-color: #FFFFFF;
 }
-.OTurn .cell:hover::before, .OTurn .cell:focus::before {
+.OTurn .cell:not(.X, .O):hover::before, .OTurn .cell:not(.X, .O):focus::before {
   background-color: #c7d0e7;
 }
 
-.gridContainer div.O.cell {
+.gridContainer .O.cell {
   background-color: #222E50;
 }
-.gridContainer div.O.cell::before {
+.gridContainer .O.cell::before {
   width: 75%;
   height: 75%;
   border-radius: 50%;
   background-color: #FFFFFF;
 }
-.gridContainer div.O.cell::after {
+.gridContainer .O.cell::after {
   width: 45%;
   height: 45%;
   border-radius: 50%;

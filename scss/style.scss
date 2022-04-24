@@ -73,14 +73,14 @@ body{
 		}
 }
 
-.XTurn .cell{
+.XTurn .cell:not(.O,.X){
 	@include xStyle($plainColor);
 	&:hover::after,&:hover::before{
 		background-color: scale-color($solidColor, $lightness: 80%);
 	}
 }
 
-.gridContainer div.X.cell{						//.gridContainer and div added for increasing specificity
+.gridContainer .X.cell{						//.gridContainer and div added for increasing specificity
 	background-color: $solidColor;
 	@include xStyle($plainColor);
 }
@@ -100,14 +100,14 @@ body{
 	}
 }
 
-.OTurn .cell{
+.OTurn .cell:not(.X,.O){
 	@include oStyle($plainColor,$plainColor);
 	&:hover::before{
 		background-color: scale-color($solidColor,$lightness:80%);
 	}
 }
 
-.gridContainer div.O.cell{						//.gridContainer and div added for increasing specificity
+.gridContainer .O.cell{						//.gridContainer and div added for increasing specificity
 	background-color: $solidColor;
 	@include oStyle($plainColor, $solidColor);
 }
