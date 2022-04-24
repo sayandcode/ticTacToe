@@ -1,13 +1,13 @@
 // format= 0 000 0 001 0 001 0 100 0 001 0 001 0 000 0 001 
 // format= 0 aDi 0 Dia 0 Co3 0 Co2 0 Co1 0 Rw3 0 Rw2 0 Rw1 
 function playGame(n){
-  
   //cache the DOM
   const gridContainer=document.querySelector('.gridContainer'); 
   gridContainer.style['grid-template-rows']=`repeat(${n}, ${300/n}px)`;
   gridContainer.style['grid-template-columns']=`repeat(${n}, ${300/n}px)`;
+  let turn;
 
-   const board = (function(){
+  const board = (function(){
     function generateCellValues(){
       let cell=[]; 
       let indenter=0;
@@ -57,17 +57,37 @@ function playGame(n){
         const cell=document.createElement('div');
         cell.classList.add('cell');
         gridContainer.appendChild(cell);
-        
       }
+      turn=Math.floor(Math.random()*2);
+      turn==0 ? gridContainer.classList.add('OTurn'): gridContainer.classList.add('XTurn');  //randomly start with X or O
     }
-  
+
+    function listen(){
+      gridContainer.addEventListener('click',(e)=>{
+        if(e.target.hasAttribute('data-key'))
+          turn==0 ? e.target.classList.add('O') : e.target.classList.add('X');
+        
+        //next person play
+        gridContainer.classList.toggle('XTurn');
+        gridContainer.classList.toggle('OTurn');
+        turn=!turn; 
+        
+      })
+    }
+
     return {
+      create,
       generateCellValues,
-      create
-    }
+      listen
+    };
   })();
 
   board.create();  //creates an nxn board in the DOM, and assigns value to each cell 
+  const cells=gridContainer.querySelectorAll('.cell');
+  board.generateCellValues().map((cellVal,i)=>{
+    cells[i].setAttribute('data-key',cellVal);
+  })
+  board.listen();
 }
 
 playGame(3);
