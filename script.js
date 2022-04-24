@@ -25,15 +25,21 @@ function playGame(n){
         
         
         //add to appropriate column
-        //i=0,3,6 => Co1 => p=12,13,14 =>   n(n+1)   + Math.round(i/n) places
-        //i=1,4,7 => Co2 => p=16,17,18 => (n+1)(n+1) + Math.round(i/n) places
-        //i=2,5,8 => Co3 => p=20,21,22 => (n+2)(n+1) + Math.round()
-        //cell +=2**(cross rows + (colNumberFinder)*(n+1) + indent)
-        cell[i]+=2**( n*(n+1) + (i%n + 1)*(n+1) + Math.round(i/n) );
+        //i=0,3,6 => Co1 => p=12,13,14 =>   n(n+1)   + Math.floor(i/n) places
+        //i=1,4,7 => Co2 => p=16,17,18 => (n+1)(n+1) + Math.floor(i/n) places
+        //i=2,5,8 => Co3 => p=20,21,22 => (n+2)(n+1) + Math.floor(i/n)
+        //i=0,4,8,12=> Co1 => p=20,21,22,23 => n(n+1) + Math.floor(i/n) places
+        //i=1,5,9.13=> CO2 => p=25,26,27,28 => (n+1)(n+1) + Math.floor(i/n) places
+        //i=2,6,10,14=>Co3 => p=30,31,32,33 => (n+2)(n+1) + Math.floor(i/n) places
+        
+        //cell +=2**((n rows + (colNumberFinder))*(n+1) + indent)
+        let colPos=( (n+ i%n)*(n+1) + Math.floor(i/n) );
+        let colVal=2**colPos;
+        cell[i]+=colVal;
 
-        //add to appropriate diagonal 
-        if(i%(n+1)===0)                                     //if its on the idagonal    
-          cell[i]+=2**( (2*n*(n+1)) + (Math.round(i/4)) );  //diagonal value is stored after the [n rows+ n columns]*(n+1) digits for each
+        // //add to appropriate diagonal 
+        if(i%(n+1)===0)                                     //if its on the diagonal    
+          cell[i]+=2**( (2*n*(n+1)) + (Math.floor(i/n+1)) );  //diagonal value is stored after the [n rows+ n columns]*(n+1) digits for each
           
         //add to appropriate antiDiagonal 
         if ( (i%(n-1) === 0) && (i!==0) && (i!==(n**2 - 1)) ) //excludes first and last element, which also happen to satisfy this condition
@@ -50,22 +56,23 @@ function playGame(n){
     //     return num2paddedString(cell,n);
     //   });  
     //   console.table(result);
-    //   console.log(result[0]);
-    //   console.log(result[3]);
-    //   console.log(result[6]);
+    //   console.log('0 aDia 0 Diag 0 Col4 0 Col3 0 Col2 0 Col1 0 Row4 0 Row3 0 Row2 0 Row1')
+    //   for (let i = 2; i < n*n; i+=n) {
+    //     console.log(result[i],i);
+    //   }
     // }
 
-    // function num2paddedString(val,matrixSide){
-    //   let N=(2*matrixSide+2)*(matrixSide+1);
-    //   num=val.toString(2);
-    //     while(num.length<N){                                   
-    //       num='0'+num;
-    //     }
-    //     const regex=new RegExp(`(.)(.{${matrixSide}})`,'g')
-    //     num=[...num.replace(regex,'$1 $2 ')];
-    //     num=num.join('');
-    //     return num;
-    // }
+    function num2paddedString(val,matrixSide){
+      let N=(2*matrixSide+2)*(matrixSide+1);
+      num=val.toString(2);
+        while(num.length<N){                                   
+          num='0'+num;
+        }
+        const regex=new RegExp(`(.)(.{${matrixSide}})`,'g')
+        num=[...num.replace(regex,'$1 $2 ')];
+        num=num.join('');
+        return num;
+    }
 
     // displayNbits(generateCellValues());
     /* IT IS NOT USED IN THE FUNCTION, AND IS SOLELY FOR YOUR UNDERSTANDING */
@@ -84,10 +91,13 @@ function playGame(n){
       cells.forEach(cell=>{
         cell.addEventListener('click',(e)=>{
           let currVal=Number(e.target.getAttribute('data-key'));
+          
+          console.clear();
+          console.log('curVal:',num2paddedString(currVal,4));
+          
           if(!currVal)
             return;          
           
-          //mark the cell
           if(turn==0){
             e.target.classList.add('O');
             Oboard+=currVal;
@@ -97,9 +107,11 @@ function playGame(n){
             Xboard+=currVal;
           }
 
+          console.log('Xboard:',num2paddedString(Xboard,4));
+          console.log('Oboard:',num2paddedString(Oboard,4));
+  
           if(checkForWin())
-            alert('Won');
-          
+            alert(turn?'X Won':'O Won');
           //next person play
           gridContainer.classList.toggle('XTurn');
           gridContainer.classList.toggle('OTurn');
@@ -136,4 +148,4 @@ function playGame(n){
   board.listen(cells);
 }
 
-playGame(3);
+playGame(4);
