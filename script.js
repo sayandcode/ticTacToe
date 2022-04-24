@@ -9,8 +9,8 @@ function playGame(n){
 
   const board = (function(){
     //empty board
-    let Oboard=0;  
-    let Xboard=0
+    let Oboard=0n;  
+    let Xboard=0n;
 
     function generateCellValues(){
       let cell=[]; 
@@ -53,7 +53,7 @@ function playGame(n){
     // function displayNbits(matrix){          
     //   let n=matrix.length**0.5
     //   result=matrix.map(cell=>{
-    //     return num2paddedString(cell,n);
+    //     return _num2paddedString(cell,n);
     //   });  
     //   console.table(result);
     //   console.log('0 aDia 0 Diag 0 Col4 0 Col3 0 Col2 0 Col1 0 Row4 0 Row3 0 Row2 0 Row1')
@@ -62,7 +62,7 @@ function playGame(n){
     //   }
     // }
 
-    function num2paddedString(val,matrixSide){
+    function _num2paddedString(val,matrixSide){
       let N=(2*matrixSide+2)*(matrixSide+1);
       num=val.toString(2);
         while(num.length<N){                                   
@@ -90,10 +90,12 @@ function playGame(n){
     function listen(cells){
       cells.forEach(cell=>{
         cell.addEventListener('click',(e)=>{
-          let currVal=Number(e.target.getAttribute('data-key'));
+          let currVal=BigInt(e.target.getAttribute('data-key'));  //use bigInt inside this function to eliminate any errors
           
+          /* debugging tool */
           console.clear();
-          console.log('curVal:',num2paddedString(currVal,4));
+          console.log('curVal:',_num2paddedString(currVal,4));
+          /* debugging tool */
           
           if(!currVal)
             return;          
@@ -107,11 +109,13 @@ function playGame(n){
             Xboard+=currVal;
           }
 
-          console.log('Xboard:',num2paddedString(Xboard,4));
-          console.log('Oboard:',num2paddedString(Oboard,4));
+          /* debugging tool */
+          console.log('Xboard:',_num2paddedString(Xboard,4));
+          console.log('Oboard:',_num2paddedString(Oboard,4));
+          /* debugging tool */
   
-          if(checkForWin())
-            alert(turn?'X Won':'O Won');
+          if(_checkForWin())
+            _showEndScreen();
           //next person play
           gridContainer.classList.toggle('XTurn');
           gridContainer.classList.toggle('OTurn');
@@ -120,17 +124,25 @@ function playGame(n){
       });
     }
 
-    function checkForWin(){
+    function _checkForWin(){
       let currBoard = turn==0 ? Oboard: Xboard;
-      
       let result= currBoard;
-      for (let i = 1; i < n; i++) {
-        if(i%2)
-          result=result&(currBoard<<1);
-        if(i%2==0)
-          result=result&(currBoard>>1);
+      
+      //n=2 => 1L 0R shifts
+      //n=3 => 1L 1R shifts
+      //n=4 => 2L 1R shifts
+
+      for (let i = 1; i <= n/2; i++) { //for every even number
+          result=result&(currBoard<<BigInt(i));
+      }
+      for (let i = 1; i <= (n-1)/2; i++) { //for every even number
+          result=result&(currBoard>>BigInt(i));
       }
       return !!result;
+    }
+
+    function _showEndScreen(){
+      alert(turn?'X Won':'O Won');
     }
 
     return {
@@ -140,7 +152,7 @@ function playGame(n){
     };
   })();
 
-  board.create();  //creates an nxn board in the DOM, and assigns value to each cell 
+  board.create();  //creates an nxn board in the DOM
   const cells=gridContainer.querySelectorAll('.cell');
   board.generateCellValues().map((cellVal,i)=>{
     cells[i].setAttribute('data-key',cellVal);
@@ -148,4 +160,4 @@ function playGame(n){
   board.listen(cells);
 }
 
-playGame(4);
+playGame(2);
