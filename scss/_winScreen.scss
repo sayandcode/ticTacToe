@@ -47,7 +47,7 @@
     }
 }
 
-.replay{
+.replayBtn{
     position: absolute;
 }
 
@@ -57,8 +57,10 @@
 }
 
 .hide {
-    display: none;  
-    span::after{
+    .spinner,.endMessage,.replayBtn{
+        display: none;  
+    }
+    .endMessage span::after{
         width: 0%;
     }
 }

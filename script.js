@@ -142,7 +142,20 @@ function playGame(n){
     }
 
     function _showEndScreen(){
-      alert(turn?'X Won':'O Won');
+      _toggleEndScreen();
+      document.querySelector('button.replayBtn').addEventListener('click',()=>{
+        gridContainer.textContent='';
+        gridContainer.classList.remove('XTurn','OTurn')
+        const newGridSize=document.querySelector('.spinner input');
+        _toggleEndScreen();
+        playGame(Number(newGridSize.getAttribute('value')));
+      });
+    }
+
+    function _toggleEndScreen(){
+      gridContainer.classList.toggle('inactive');
+      document.body.classList.toggle('hide');
+
     }
 
     return {

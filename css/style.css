@@ -125,13 +125,13 @@ button:hover, button.cell:focus {
   cursor: pointer;
 }
 
-button.replay {
+button.replayBtn {
   font-weight: 500;
   background-color: #FC7A57;
   padding: 0.25em 0.5em;
   border-radius: 25px;
 }
-button.replay:hover, button.replay.cell:focus {
+button.replayBtn:hover, button.replayBtn.cell:focus {
   background-color: #FFFFFF;
   color: #FC7A57;
   border: 2px solid #FC7A57;
@@ -195,7 +195,7 @@ button.plus::after {
   background-color: #ff6666;
 }
 
-.replay {
+.replayBtn {
   position: absolute;
 }
 
@@ -203,9 +203,9 @@ button.plus::after {
   pointer-events: none;
 }
 
-.hide {
+.hide .spinner, .hide .endMessage, .hide .replayBtn {
   display: none;
 }
-.hide span::after {
+.hide .endMessage span::after {
   width: 0%;
 }/*# sourceMappingURL=style.css.map */
