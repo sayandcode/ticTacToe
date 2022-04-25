@@ -1,20 +1,34 @@
 (function(){  //Persistent UI 
-  n=2;//starting size
 
   //cache the persistent DOM
   const gridContainer=document.querySelector('.gridContainer'); 
   const replayBtn=document.querySelector('button.replayBtn');
   const endMessage=document.querySelector('.endMessage');
-  
-  //attach persistent listener to replay Button. But button displays only when game is over
-  replayBtn.addEventListener('click',function(){
+  const spinnerBtns=document.querySelectorAll('.spinner>button');
+  const newGridSize=document.querySelector('.spinner>input');
+
+  //attach event listeners to UI buttons(hidden by default)
+  spinnerBtns.forEach(button =>
+    button.addEventListener('click',e =>{
+      switch(e.target.getAttribute('class')){
+        case 'minus': 
+          newGridSize.value= Number(newGridSize.value)-(newGridSize.value<3 ? 0: 1);
+          break;
+
+        case 'plus':
+          newGridSize.value= Number(newGridSize.value)+(newGridSize.value>20 ? 0: 1);
+          break;
+      }
+  }));
+
+  replayBtn.addEventListener('click',()=>{
     endMessage.classList.remove('Owon','Xwon');
     toggleEndScreen();
     game(Number(document.querySelector('.spinner input').value));
   });
 
   //auto start first game
-  game(2);
+  game(Number(newGridSize.value));
   //
   function game(n){
     //empty current grid
