@@ -154,24 +154,41 @@ button.plus::after {
   font-style: italic;
   font-weight: 700;
 }
+.endMessage.Xwon::before {
+  content: "X";
+}
+.endMessage.Owon::before {
+  content: "O";
+}
 .endMessage span {
   position: relative;
 }
-.endMessage span.win::before {
-  content: "Won!";
-}
-.endMessage span.lose::before {
-  content: "Lose!";
-}
 .endMessage span::after {
   content: "";
-  width: 100%;
   height: 0.2em;
   background-color: #FC7A57;
   position: absolute;
   top: 1.1em;
   left: 0;
   transform: rotate(-2.5deg);
+  -webkit-animation: trim-on 0.5s ease-in-out forwards;
+          animation: trim-on 0.5s ease-in-out forwards;
+}
+@-webkit-keyframes trim-on {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+@keyframes trim-on {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
 }
 
 .spinner {

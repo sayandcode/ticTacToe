@@ -4,24 +4,34 @@
     font-size: 3rem;
     font-style: italic;
     font-weight: 700;
+    &.Xwon::before{
+        content: 'X';
+    }
+    &.Owon::before{
+        content: 'O';
+    }
     // padding-bottom: 0.5em;
+    
     span{
         position: relative;
-        &.win::before{
-            content: 'Won!';
-        }
-        &.lose::before{
-            content: 'Lose!';
-        }
         &::after{
             content: '';
-            width: 100%;
             height: 0.2em;
             background-color: $accentColor;
             position: absolute;
             top: 1.1em;
             left: 0;
             transform: rotate(-2.5deg);
+            animation:trim-on 0.5s ease-in-out forwards;
+        }
+
+        @keyframes trim-on {
+            from{
+                width: 0%;
+            }
+            to{
+                width: 100%;
+            }
         }
     }
 }
