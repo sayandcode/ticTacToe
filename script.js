@@ -80,18 +80,19 @@
         //i=2,6,10,14=>Co3 => p=30,31,32,33 => (n+2)(n+1) + Math.floor(i/n) places
         
         //cell +=2**((n rows + (colNumberFinder))*(n+1) + indent)
-        let colPos=( (n+ i%n)*(n+1) + Math.floor(i/n) );
-        let colVal=2**colPos;
-        cellVal+=colVal;
+        const colPos=( (n+ i%n)*(n+1) + Math.floor(i/n) );
+        cellVal+=2**colPos;
 
         // //add to appropriate diagonal 
-        if(i%(n+1)===0)                                     //if its on the diagonal    
-          cellVal+=2**( (2*n*(n+1)) + (Math.floor(i/n+1)) );  //diagonal value is stored after the [n rows+ n columns]*(n+1) digits for each
-          
+        if(i%(n+1)===0){                                     //if its on the diagonal    
+          const diaPos=( (2*n*(n+1)) + (Math.floor(i/n)) );
+          cellVal+=2**diaPos  //diagonal value is stored after the [n rows+ n columns]*(n+1) digits for each
+        }  
         //add to appropriate antiDiagonal 
-        if ( (i%(n-1) === 0) && (i!==0) && (i!==(n**2 - 1)) ) //excludes first and last element, which also happen to satisfy this condition
-          cellVal+= 2**( (2*n + 1)*(n+1) + i/(n-1) - 1);      //antiDiagonal value is stored after [n rows + n columns + 1diag]*(n-1) digits for each
-          
+        if ( (i%(n-1) === 0) && (i!==0) && (i!==(n**2 - 1)) ){ //excludes first and last element, which also happen to satisfy this condition
+          const antiDiaPos=( (2*n + 1)*(n+1) + i/(n-1) - 1);
+          cellVal+= 2**antiDiaPos;      //antiDiagonal value is stored after [n rows + n columns + 1diag]*(n-1) digits for each
+        } 
         domCells[i].setAttribute('data-key',cellVal);
         
 
