@@ -1,16 +1,31 @@
 // format= 0 000 0 001 0 001 0 100 0 001 0 001 0 000 0 001 
 // format= 0 aDi 0 Dia 0 Co3 0 Co2 0 Co1 0 Rw3 0 Rw2 0 Rw1 
 function playGame(n){
-  //cache the DOM
+  
   const gridContainer=document.querySelector('.gridContainer'); 
-  gridContainer.style['grid-template-rows']=`repeat(${n}, ${300/n}px)`;
-  gridContainer.style['grid-template-columns']=`repeat(${n}, ${300/n}px)`;
-  let turn;
 
   const board = (function(){
-    //empty board
+    //empty current grid
+    gridContainer.textContent='';
+    gridContainer.classList.remove('XTurn','OTurn');
+    
+    //reinitialize board
     let Oboard=0n;  
     let Xboard=0n;
+    let turn;
+    turn=Math.floor(Math.random()*2);
+    turn==0 ? gridContainer.classList.add('OTurn'): gridContainer.classList.add('XTurn');  //randomly start with X or O
+
+    //create grid structure
+    gridContainer.style['grid-template-rows']=`repeat(${n}, ${300/n}px)`;
+    gridContainer.style['grid-template-columns']=`repeat(${n}, ${300/n}px)`;
+
+    //create cells in grid
+    for (let i = 0; i < n*n; i++) {
+      const cell=document.createElement('div');
+      cell.classList.add('cell');
+      gridContainer.appendChild(cell);
+    }
 
     function generateCellValues(){
       let cell=[]; 
@@ -77,15 +92,6 @@ function playGame(n){
     // displayNbits(generateCellValues());
     /* IT IS NOT USED IN THE FUNCTION, AND IS SOLELY FOR YOUR UNDERSTANDING */
 
-    function create(){
-      for (let i = 0; i < n*n; i++) {
-        const cell=document.createElement('div');
-        cell.classList.add('cell');
-        gridContainer.appendChild(cell);
-      }
-      turn=Math.floor(Math.random()*2);
-      turn==0 ? gridContainer.classList.add('OTurn'): gridContainer.classList.add('XTurn');  //randomly start with X or O
-    }
 
     function listen(cells){
       cells.forEach(cell=>{
@@ -142,30 +148,24 @@ function playGame(n){
     }
 
     function _showEndScreen(){
-      _toggleEndScreen();
-      document.querySelector('button.replayBtn').addEventListener('click',()=>{
-        gridContainer.textContent='';
-        gridContainer.classList.remove('XTurn','OTurn')
-        const newGridSize=document.querySelector('.spinner input');
-        _toggleEndScreen();
-        playGame(Number(newGridSize.getAttribute('value')));
+      gridContainer.classList.toggle('inactive');
+      document.body.classList.toggle('hide');
+      const replayBtn=document.querySelector('button.replayBtn');
+
+      replayBtn.addEventListener('click',function newGame(){
+        gridContainer.classList.toggle('inactive');
+        document.body.classList.toggle('hide');
+        playGame(Number(document.querySelector('.spinner input').value));
+        replayBtn.removeEventListener('click',newGame);
       });
     }
 
-    function _toggleEndScreen(){
-      gridContainer.classList.toggle('inactive');
-      document.body.classList.toggle('hide');
-
-    }
-
     return {
-      create,
       generateCellValues,
       listen
     };
   })();
 
-  board.create();  //creates an nxn board in the DOM
   const cells=gridContainer.querySelectorAll('.cell');
   board.generateCellValues().map((cellVal,i)=>{
     cells[i].setAttribute('data-key',cellVal);
